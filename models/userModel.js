@@ -67,7 +67,5 @@ userSchema.methods.generateToken = function () {
   });
 };
 
-//
 const userMdoel = mongoose.model("Users", userSchema);
-
 export default userMdoel;
