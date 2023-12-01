@@ -6,6 +6,7 @@ import userRouter from "./routes/userRoutes.js";
 import cookieParser from "cookie-parser";
 import cloudinary from "cloudinary";
 import productRouter from "./routes/productRoutes.js";
+import categoryRouter from "./routes/categoryRoutes.js";
 
 dotenv.config();
 
@@ -23,6 +24,7 @@ app.use(cookieParser());
 
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/product", productRouter);
+app.use("/api/v1/category", categoryRouter);
 
 app.get("/", (req, res) => {
   return res.status(200).send("<h1>Welcome To Node server </h1>");
