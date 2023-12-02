@@ -5,7 +5,7 @@ import { getDataUri } from "./../utils/features.js";
 export const getAllProductsController = async (req, res) => {
   try {
     const products = await productModel.find({});
-    console.log("products", products);
+    // console.log("products", products);
     res.status(200).send({
       success: true,
       message: "all products fetched successfully",
@@ -108,7 +108,7 @@ export const updateProductController = async (req, res) => {
   try {
     // find product
     const product = await productModel.findById(req.params.id);
-    console.log("product", product);
+    // console.log("product", product);
     //valdiatiuon
     if (!product) {
       return res.status(404).send({

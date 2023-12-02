@@ -58,7 +58,7 @@ export const deleteCategoryController = async (req, res) => {
   try {
     // find category
     const category = await categoryModel.findById(req.params.id);
-    console.log("category", category);
+    // console.log("category", category);
     //validation
     if (!category) {
       return res.status(404).send({
@@ -68,7 +68,7 @@ export const deleteCategoryController = async (req, res) => {
     }
     // find product with this category id
     const products = await productModel.find({ category: category._id });
-    console.log("products", products);
+    // console.log("products", products);
 
     // update producty category
     for (let i = 0; i < products.length; i++) {
