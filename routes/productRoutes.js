@@ -7,6 +7,7 @@ import {
   deleteProductImageController,
   getAllProductsController,
   getSingleProductController,
+  productReviewController,
   updateProductController,
   updateProductImageController,
 } from "../controllers/productController.js";
@@ -55,5 +56,8 @@ productRouter.delete(
   isAdmin,
   deleteProductController
 );
+
+// REVIEW PRODUCT
+productRouter.put("/:id/review", isAuth, productReviewController);
 
 export default productRouter;
