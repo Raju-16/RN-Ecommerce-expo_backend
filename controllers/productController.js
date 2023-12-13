@@ -3,12 +3,22 @@ import cloudinary from "cloudinary";
 import { getDataUri } from "./../utils/features.js";
 
 export const getAllProductsController = async (req, res) => {
+  const { keyword, category } = req.query;
   try {
-    const products = await productModel.find({});
+    const products = await productModel
+      .find({
+        name: {
+          $regex: keyword ? keyword : "",
+          $options: "i",
+        },
+        // category: category ? category : null,
+      })
+      .populate("category");
     // console.log("products", products);
     res.status(200).send({
       success: true,
       message: "all products fetched successfully",
+      totalProducts: products.length,
       products,
     });
   } catch (error) {
@@ -17,6 +27,25 @@ export const getAllProductsController = async (req, res) => {
       success: false,
       message: "Error In Get All Products API",
       error: error.message,
+    });
+  }
+};
+
+// GET TOP PRODUCT
+export const getTopProductsController = async (req, res) => {
+  try {
+    const products = await productModel.find({}).sort({ rating: -1 }).limit(3);
+    res.status(200).send({
+      success: true,
+      message: "top 3 products",
+      products,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error In Get TOP PRODUCTS API",
+      error,
     });
   }
 };
