@@ -219,3 +219,41 @@ export const updateProfilePicController = async (req, res) => {
     });
   }
 };
+
+// FORGOT PASSWORD
+export const passwordResetController = async (req, res) => {
+  try {
+    // user get email || newPassword || answer
+    const { email, newPassword, answer } = req.body;
+    // valdiation
+    if (!email || !newPassword || !answer) {
+      return res.status(500).send({
+        success: false,
+        message: "Please Provide All Fields",
+      });
+    }
+    // find user
+    const user = await userModel.findOne({ email, answer });
+    //valdiation
+    if (!user) {
+      return res.status(404).send({
+        success: false,
+        message: "invalid user or answer",
+      });
+    }
+
+    user.password = newPassword;
+    await user.save();
+    res.status(200).send({
+      success: true,
+      message: "Your Password Has Been Reset Please Login !",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error In password reset API",
+      error,
+    });
+  }
+};

@@ -3,6 +3,7 @@ import {
   getUserProfileController,
   loginController,
   logoutController,
+  passwordResetController,
   registerController,
   udpatePasswordController,
   updateProfileController,
@@ -25,5 +26,7 @@ userRouter.put(
   singleUpload,
   updateProfilePicController
 );
+// FORGOT PASSWORD
+userRouter.post("/reset-password", passwordResetController);
 
 export default userRouter;
