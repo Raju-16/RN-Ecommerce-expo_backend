@@ -99,7 +99,6 @@ export const getUserProfileController = async (req, res) => {
 
 // LOGOUT
 export const logoutController = async (req, res) => {
-
   try {
     res
       .status(200)

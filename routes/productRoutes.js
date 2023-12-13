@@ -1,6 +1,6 @@
 import express from "express";
 import { singleUpload } from "../middlewares/multer.js";
-import { isAuth } from "../middlewares/authMiddleware.js";
+import { isAdmin, isAuth } from "../middlewares/authMiddleware.js";
 import {
   createProductController,
   deleteProductController,
@@ -20,23 +20,40 @@ productRouter.get("/get-all", getAllProductsController);
 productRouter.get("/:id", getSingleProductController);
 
 // CREATE PRODUCT
-productRouter.post("/create", isAuth, singleUpload, createProductController);
+productRouter.post(
+  "/create",
+  isAuth,
+  isAdmin,
+  singleUpload,
+  createProductController
+);
 
 // UPDATE PRODUCT
-productRouter.put("/:id", isAuth, updateProductController);
+productRouter.put("/:id", isAuth, isAdmin, updateProductController);
 
 // UPDATE PRODUCT IMAGE
 productRouter.put(
   "/image/:id",
   isAuth,
+  isAdmin,
   singleUpload,
   updateProductImageController
 );
 
 // delete product image
-productRouter.delete("/delete-image/:id", isAuth, deleteProductImageController);
+productRouter.delete(
+  "/delete-image/:id",
+  isAuth,
+  isAdmin,
+  deleteProductImageController
+);
 
 // delete product
-productRouter.delete("/delete-product/:id", isAuth, deleteProductController);
+productRouter.delete(
+  "/delete-product/:id",
+  isAuth,
+  isAdmin,
+  deleteProductController
+);
 
 export default productRouter;
