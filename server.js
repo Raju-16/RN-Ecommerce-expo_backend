@@ -8,6 +8,8 @@ import cloudinary from "cloudinary";
 import productRouter from "./routes/productRoutes.js";
 import categoryRouter from "./routes/categoryRoutes.js";
 import orderRouter from "./routes/oerderRoutes.js";
+import helmet from "helmet";
+import mongoSanitize from "express-mongo-sanitize";
 
 dotenv.config();
 
@@ -19,6 +21,9 @@ cloudinary.v2.config({
 });
 
 const app = express();
+
+app.use(helmet());
+app.use(mongoSanitize());
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
